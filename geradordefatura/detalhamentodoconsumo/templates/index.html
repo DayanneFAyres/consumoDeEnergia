@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Consumo de Energia</title>
+		<link rel="stylesheet" href="{% static 'reset.css' %}">
+		<link rel="stylesheet" href="{% static 'style.css' %}">
+	</head>
+	<body>
+		<header>
+			<div class="caixa">
+				<h1>Detalhamento do consumo de energia para EDP-ES</h1>	
+				<img src="{% static 'imagens/logo2.png' %}">			
+			</div>
+		</header>
+
+		<main>
+			<form action="{% url 'fatura' %}" class="dados" methoD="POST">
+				{% csrf_token %}
+				{% for field in form %}
+					<div class="campos">						
+						{{ field.label_tag }}					
+					</div>
+					<div class="campos">						
+						{{ field }}
+						{{ field.erros }}					
+					</div>
+				{% endfor %}
+				
+				 <input class="submit" type="submit" value="Calcular">
+			</form> 	
+		</main>
+		<footer>
+			<p class="copyright">&copy; Copyright Dayanne Ferreira Ayres - 2022</p>
+		</footer>
+	</body>
+</html>
